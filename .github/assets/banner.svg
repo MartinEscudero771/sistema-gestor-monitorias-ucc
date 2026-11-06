@@ -1,106 +1,108 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="Banner del Sistema de Gestor de Monitorías Académicas UCC">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="Sistema de Gestor de Monitorías Académicas UCC">
   <defs>
     <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#132740"/>
-      <stop offset="0.55" stop-color="#0e1e33"/>
-      <stop offset="1" stop-color="#0b1929"/>
+      <stop offset="0" stop-color="#132A47"/>
+      <stop offset="0.5" stop-color="#0E1F36"/>
+      <stop offset="1" stop-color="#0A1728"/>
     </linearGradient>
-    <linearGradient id="acento" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#00acc9"/>
-      <stop offset="0.5" stop-color="#0091b3"/>
-      <stop offset="1" stop-color="#007f94"/>
+    <linearGradient id="subrayado" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00ACC9"/>
+      <stop offset="1" stop-color="#80BA27"/>
     </linearGradient>
-    <linearGradient id="chips" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#0b1929" stop-opacity="0.85"/>
-      <stop offset="1" stop-color="#132740" stop-opacity="0.85"/>
-    </linearGradient>
-    <pattern id="rejilla" width="34" height="34" patternUnits="userSpaceOnUse">
-      <path d="M 34 0 L 0 0 0 34" fill="none" stroke="#ffffff" stroke-opacity="0.028" stroke-width="1"/>
+    <pattern id="puntos" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#ffffff" opacity="0.05"/>
     </pattern>
-    <radialGradient id="halo" cx="0.82" cy="0.2" r="0.7">
-      <stop offset="0" stop-color="#00acc9" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#00acc9" stop-opacity="0"/>
+    <radialGradient id="brillo" cx="0.85" cy="0.12" r="0.75">
+      <stop offset="0" stop-color="#00ACC9" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#00ACC9" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- fondo -->
-  <rect x="0" y="0" width="1200" height="320" rx="18" fill="url(#fondo)"/>
-  <rect x="0" y="0" width="1200" height="320" rx="18" fill="url(#rejilla)"/>
-  <rect x="0" y="0" width="1200" height="320" rx="18" fill="url(#halo)"/>
-  <rect x="0" y="0" width="1200" height="320" rx="18" fill="none" stroke="#00acc9" stroke-opacity="0.35" stroke-width="2"/>
+  <rect width="1200" height="320" rx="16" fill="url(#fondo)"/>
+  <rect width="1200" height="320" rx="16" fill="url(#puntos)"/>
+  <rect width="1200" height="320" rx="16" fill="url(#brillo)"/>
+  <rect width="1200" height="320" rx="16" fill="none" stroke="#7FD8E8" stroke-opacity="0.22" stroke-width="2"/>
+  <rect x="0" y="0" width="1200" height="6" rx="3" fill="url(#subrayado)"/>
 
-  <!-- barra de acento -->
-  <rect x="0" y="0" width="1200" height="10" rx="5" fill="url(#acento)"/>
-  <rect x="0" y="0" width="220" height="10" rx="5" fill="#80ba27"/>
-  <rect x="220" y="0" width="90" height="10" rx="5" fill="#cad400"/>
-
-  <!-- monograma UCC -->
-  <g transform="translate(74, 92)">
-    <rect x="0" y="0" width="136" height="136" rx="16" fill="#00acc9" fill-opacity="0.12" stroke="#00acc9" stroke-opacity="0.6" stroke-width="1.6"/>
-    <text x="68" y="58" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="800" fill="#ffffff">UCC</text>
-    <text x="68" y="86" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" letter-spacing="2.6" fill="#7fd8e8">MONITORÍAS</text>
-    <path d="M 30 104 L 106 104" stroke="#80ba27" stroke-width="3" stroke-linecap="round"/>
-    <path d="M 44 114 L 92 114" stroke="#cad400" stroke-opacity="0.55" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- monograma -->
+  <g transform="translate(56,64)">
+    <rect width="120" height="120" rx="14" fill="#00ACC9" fill-opacity="0.10" stroke="#00ACC9" stroke-opacity="0.55" stroke-width="1.5"/>
+    <text x="60" y="54" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" fill="#FFFFFF">UCC</text>
+    <text x="60" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" letter-spacing="3" fill="#7FD8E8">ACADEMIA</text>
+    <path d="M28 92 L92 92" stroke="#80BA27" stroke-width="3" stroke-linecap="round"/>
+    <path d="M42 102 L78 102" stroke="#4B5F73" stroke-width="2.4" stroke-linecap="round"/>
   </g>
 
-  <!-- título -->
+  <!-- bloque de título -->
   <g font-family="Segoe UI, Arial, sans-serif">
-    <text x="258" y="128" font-size="44" font-weight="800" fill="#ffffff">Gestor de Monitorías Académicas</text>
-    <text x="260" y="166" font-size="21" font-weight="600" fill="#7fd8e8" letter-spacing="0.6">Servicio de acompañamiento académico · Universidad Cooperativa de Colombia</text>
-
-    <text x="260" y="204" font-size="15.5" fill="#c8d4dd">Solicitudes · postulaciones a monitor · listas de riesgo · informes de horas · calendario</text>
-    <text x="260" y="228" font-size="15.5" fill="#c8d4dd">notificaciones · reportes oficiales · auditoría · simulador de capacidad M/G/c</text>
+    <text x="222" y="70" font-size="13.5" letter-spacing="4.5" font-weight="600" fill="#7FD8E8">UNIVERSIDAD COOPERATIVA DE COLOMBIA</text>
+    <text x="220" y="126" font-size="46" font-weight="800" fill="#FFFFFF">Gestor de Monitorías</text>
+    <text x="220" y="176" font-size="46" font-weight="300" fill="#B9DCFF">Académicas</text>
+    <rect x="222" y="198" width="132" height="4" rx="2" fill="url(#subrayado)"/>
+    <text x="222" y="232" font-size="17" fill="#C9D6E1">La plataforma web que digitaliza todo el ciclo del acompañamiento académico:</text>
+    <text x="222" y="256" font-size="17" fill="#C9D6E1">solicitudes, postulaciones, informes de horas, riesgo y trazabilidad total.</text>
   </g>
 
-  <!-- franja diagonal decorativa -->
-  <g opacity="0.5">
-    <rect x="262" y="246" width="120" height="4" rx="2" fill="#00acc9"/>
-    <rect x="392" y="246" width="60" height="4" rx="2" fill="#80ba27"/>
-    <rect x="462" y="246" width="30" height="4" rx="2" fill="#cad400"/>
-  </g>
-
-  <!-- chips de tecnologías -->
-  <g font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">
-    <g transform="translate(260, 268)">
-      <rect width="92" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
-      <circle cx="20" cy="17" r="5" fill="#80ba27"/>
-      <text x="34" y="22" fill="#eaf4f8">Python</text>
-      <rect width="92" height="34" rx="17" fill="none"/>
+  <!-- chips de roles -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="600">
+    <g transform="translate(222,276)">
+      <rect width="112" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.06" stroke="#00ACC9" stroke-opacity="0.45"/>
+      <circle cx="16" cy="15" r="4.2" fill="#00ACC9"/><text x="26" y="20" fill="#E8F4F9">Estudiante</text>
     </g>
-    <g transform="translate(364, 268)">
-      <rect width="80" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
-      <circle cx="18" cy="17" r="5" fill="#00acc9"/>
-      <text x="30" y="22" fill="#eaf4f8">FastAPI</text>
+    <g transform="translate(346,276)">
+      <rect width="94" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.06" stroke="#00ACC9" stroke-opacity="0.45"/>
+      <circle cx="16" cy="15" r="4.2" fill="#80BA27"/><text x="26" y="20" fill="#E8F4F9">Monitor</text>
     </g>
-    <g transform="translate(456, 268)">
-      <rect width="96" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
-      <circle cx="18" cy="17" r="5" fill="#cad400"/>
-      <text x="31" y="22" fill="#eaf4f8">MySQL</text>
+    <g transform="translate(452,276)">
+      <rect width="98" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.06" stroke="#00ACC9" stroke-opacity="0.45"/>
+      <circle cx="16" cy="15" r="4.2" fill="#CAD400"/><text x="26" y="20" fill="#E8F4F9">Profesor</text>
     </g>
-    <g transform="translate(564, 268)">
-      <rect width="104" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
-      <circle cx="18" cy="17" r="5" fill="#ffca28"/>
-      <text x="31" y="22" fill="#eaf4f8">JavaScript</text>
+    <g transform="translate(562,276)">
+      <rect width="106" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.06" stroke="#00ACC9" stroke-opacity="0.45"/>
+      <circle cx="16" cy="15" r="4.2" fill="#F0A72B"/><text x="26" y="20" fill="#E8F4F9">Bienestar</text>
     </g>
-    <g transform="translate(680, 268)">
-      <rect width="98" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
-      <circle cx="18" cy="17" r="5" fill="#a78bfa"/>
-      <text x="31" y="22" fill="#eaf4f8">Bootstrap</text>
+    <g transform="translate(680,276)">
+      <rect width="94" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.06" stroke="#00ACC9" stroke-opacity="0.45"/>
+      <circle cx="16" cy="15" r="4.2" fill="#B98BE0"/><text x="26" y="20" fill="#E8F4F9">Asesoría</text>
     </g>
-    <g transform="translate(790, 268)">
-      <rect width="66" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
-      <circle cx="19" cy="17" r="5" fill="#f472b6"/>
-      <text x="30" y="22" fill="#eaf4f8">CSS</text>
+    <g transform="translate(786,276)">
+      <rect width="82" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.06" stroke="#00ACC9" stroke-opacity="0.45"/>
+      <circle cx="16" cy="15" r="4.2" fill="#E05E7E"/><text x="26" y="20" fill="#E8F4F9">Admin</text>
     </g>
   </g>
 
-  <!-- sello a la derecha -->
-  <g transform="translate(1010, 96)" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
-    <rect x="0" y="0" width="126" height="126" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#7fd8e8" stroke-opacity="0.4" stroke-width="1.4"/>
-    <path d="M63 22 L96 38 L63 54 L30 38 Z" fill="#80ba27"/>
-    <path d="M88 44 L88 66 C88 74 76 80 63 80 C50 80 38 74 38 66 L38 44 L52 51 L52 66 C52 71 57 74 63 74 C69 74 74 71 74 66 L74 51 Z" fill="#cad400"/>
-    <circle cx="63" cy="92" r="16" fill="none" stroke="#00acc9" stroke-width="2.4"/>
-    <path d="M55 92 L61 98 L72 86" stroke="#00acc9" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="63" y="118" font-size="12" letter-spacing="1.4" fill="#7fd8e8">NIVEL 5</text>
+  <!-- ilustración derecha: flujo de monitoría -->
+  <g transform="translate(950,52)">
+    <!-- tarjeta: solicitud -->
+    <g font-family="Segoe UI, Arial, sans-serif">
+      <rect x="34" y="0" width="150" height="40" rx="10" fill="#FFFFFF" fill-opacity="0.07" stroke="#8FA6BA" stroke-opacity="0.35"/>
+      <circle cx="56" cy="20" r="8" fill="#00ACC9"/>
+      <text x="72" y="25" font-size="13" fill="#DCE9F2">Solicitud</text>
+      <path d="M109 40 L109 62" stroke="#5E7A93" stroke-width="2" marker-end="url(#flecha)"/>
+      <defs>
+        <marker id="flecha" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L8 4 L0 8 Z" fill="#5E7A93"/>
+        </marker>
+      </defs>
+      <!-- tarjeta: asesoría responde -->
+      <rect x="34" y="62" width="150" height="40" rx="10" fill="#FFFFFF" fill-opacity="0.07" stroke="#8FA6BA" stroke-opacity="0.35"/>
+      <circle cx="56" cy="82" r="8" fill="#B98BE0"/>
+      <text x="72" y="87" font-size="13" fill="#DCE9F2">Asignación</text>
+      <path d="M109 102 L109 124" stroke="#5E7A93" stroke-width="2" marker-end="url(#flecha)"/>
+      <!-- tarjeta: tutoría -->
+      <rect x="34" y="124" width="150" height="40" rx="10" fill="#FFFFFF" fill-opacity="0.07" stroke="#8FA6BA" stroke-opacity="0.35"/>
+      <circle cx="56" cy="144" r="8" fill="#80BA27"/>
+      <text x="72" y="149" font-size="13" fill="#DCE9F2">Tutoría</text>
+      <path d="M109 164 L109 186" stroke="#5E7A93" stroke-width="2" marker-end="url(#flecha)"/>
+      <!-- tarjeta: informe -->
+      <rect x="34" y="186" width="150" height="40" rx="10" fill="#FFFFFF" fill-opacity="0.07" stroke="#8FA6BA" stroke-opacity="0.35"/>
+      <circle cx="56" cy="206" r="8" fill="#F0A72B"/>
+      <text x="72" y="211" font-size="13" fill="#DCE9F2">Informe de horas</text>
+      <path d="M109 226 L109 248" stroke="#5E7A93" stroke-width="2" marker-end="url(#flecha)"/>
+      <!-- tarjeta: aprobación -->
+      <rect x="34" y="248" width="150" height="40" rx="10" fill="#12365A" stroke="#80BA27" stroke-opacity="0.7"/>
+      <circle cx="56" cy="268" r="8" fill="#CAD400"/>
+      <text x="72" y="273" font-size="13" fill="#FFFFFF" font-weight="600">Aprobación</text>
+    </g>
   </g>
 </svg>
