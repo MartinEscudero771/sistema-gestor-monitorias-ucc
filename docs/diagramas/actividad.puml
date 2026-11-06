@@ -1,0 +1,37 @@
+@startuml
+title Actividad — Ciclo de vida de la monitoría (solicitud → horas aprobadas)
+header Flujo UC10 → UC52 · UC30 → UC51 → UC21 → UC22 → UC32 → UC42
+
+start
+:Estudiante solicita monitoría;
+:Asesoría responde solicitud;
+if (¿Aceptada?) then (sí)
+  :Monitor programado / tutoría creada;
+else (no)
+  stop
+endif
+:Profesor reporta lista de riesgo;
+:Asesoría asigna monitor;
+:Monitor imparte tutoría;
+if (¿Realizada?) then (sí)
+  :Monitor registra informe;
+  :Profesor valida informe;
+  if (¿Aprobado?) then (sí)
+    :Bienestar aprueba horas;
+    :Horas consolidadas en reportes;
+  else (no)
+    :Informe rechazado con observación;
+    stop
+  endif
+else (no)
+  stop
+endif
+stop
+
+note right
+  Estados: pendiente → aceptada/rechazada
+  programada → realizada/cancelada
+  pendiente_profesor →
+  pendiente_bienestar → aprobado/rechazado
+end note
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+title Secuencia — Postulación como monitor (UC12 → UC41 → UC71)
+header Estudiante postula · Bienestar decide · Admin habilita
+autonumber
+
+actor "Estudiante" as EST
+boundary "SPA" as SPA
+control "POST /api" as API
+control "estudiante.py /\nbienestar.py" as MOD
+entity "MySQL" as BD
+actor "Bienestar" as BIE
+
+EST -> SPA : asignatura + bloques de horario
+activate SPA
+SPA -> API : estudiante_guardar_postulacion
+activate API
+API -> MOD : guardar_postulacion()
+activate MOD
+MOD -> BD : promedio>=0, horario válido
+MOD -> BD : INSERT postulación (pendiente)
+activate BD
+BD --> MOD : ok
+deactivate BD
+MOD --> API : ok + notifica bienestar
+deactivate MOD
+API --> SPA : 200
+deactivate API
+SPA --> EST : en revisión
+deactivate SPA
+
+BIE -> SPA : abre Validar monitores
+activate SPA
+SPA -> API : bienestar_monitores
+activate API
+API --> SPA : pendientes
+deactivate API
+alt aprueba
+  BIE -> SPA : aprobar
+  SPA -> API : decidir_postulacion(aprobada)
+  activate API
+  API -> MOD : crea monitor + usuario (UC71)
+  activate MOD
+  MOD -> BD : INSERT monitores + usuarios
+  activate BD
+  BD --> MOD : ok
+  deactivate BD
+  MOD --> API : monitor habilitado
+  deactivate MOD
+  API --> SPA : 200
+  deactivate API
+else rechaza
+  BIE -> SPA : rechazar + motivo
+  SPA -> API : decidir_postulacion(rechazada)
+  activate API
+  API -> MOD : UPDATE estado + motivo
+  MOD --> API : ok
+  deactivate API
+end
+SPA --> BIE : toast
+deactivate SPA
+@enduml

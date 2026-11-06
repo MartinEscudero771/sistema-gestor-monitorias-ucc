@@ -1,0 +1,36 @@
+# Entorno y cachés de Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Configuración real (el ejemplo versionado es backend/.env.example)
+.env
+backend/.env
+*.local
+
+# Obsoletos y respaldos
+backend/credenciales_iniciales.txt
+*.bak
+*~
+
+# Bases de datos locales
+*.db
+*.db-*
+*.sqlite3
+
+# Node (por si se agregan herramientas del frontend)
+node_modules/
+
+# SO y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Registros
+*.log

@@ -1,0 +1,63 @@
+@startuml
+title Secuencia — Lista de riesgo y asignación (UC30 → UC50 → UC51 → UC21)
+header Profesor reporta · Asesoría asigna · Monitor programa
+autonumber
+
+actor "Profesor" as PROF
+boundary "SPA" as SPA
+control "POST /api" as API
+control "profesor.py /\nasesoria.py /\nmonitor.py" as MOD
+entity "MySQL" as BD
+actor "Asesoría" as ASE
+actor "Monitor" as MON
+
+PROF -> SPA : curso + estudiantes + motivos
+activate SPA
+SPA -> API : profesor_guardar_lista
+activate API
+API -> MOD : valida curso propio
+activate MOD
+MOD -> BD : INSERT lista + casos (pendiente)
+activate BD
+BD --> MOD : ok
+deactivate BD
+MOD -> BD : notifica asesoría
+MOD --> API : lista enviada
+deactivate MOD
+API --> SPA : 200
+deactivate API
+SPA --> PROF : lista en proceso
+deactivate SPA
+
+ASE -> SPA : abre Listas de riesgo
+activate SPA
+SPA -> API : asesoria_listas
+activate API
+API --> SPA : listas + casos
+deactivate API
+ASE -> SPA : monitor + observaciones
+SPA -> API : asignar_monitor_asesoria
+activate API
+API -> MOD : valida monitor activo/disponible
+activate MOD
+MOD -> BD : INSERT asignación (activa)\n+ caso=asignado
+activate BD
+BD --> MOD : ok
+deactivate BD
+MOD -> BD : notifica monitor y estudiante
+MOD --> API : asignado
+deactivate MOD
+API --> SPA : 200
+deactivate API
+SPA --> ASE : toast
+deactivate SPA
+
+MON -> SPA : programa tutoría del caso
+activate SPA
+SPA -> API : monitor_guardar_tutoria
+activate API
+API --> SPA : programada (UC21)
+deactivate API
+SPA --> MON : sesión agendada
+deactivate SPA
+@enduml

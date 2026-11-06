@@ -1,0 +1,178 @@
+@startuml
+' ============================================================
+' CU — Casos de uso COMPLETO · Gestor de Monitorías Académicas UCC
+' Actores: Estudiante, Monitor, Profesor, Bienestar, Asesoría, Admin
+' ============================================================
+title Casos de uso — Gestor de Monitorías Académicas UCC
+header Universidad Cooperativa de Colombia · Ingeniería de Sistemas
+footer Herramientas Computacionales — Momento Evaluativo 3
+legend right
+  <b>UC Sesión:</b> UC01–UC04
+  <b>UC Estudiante:</b> UC10–UC12
+  <b>UC Monitor:</b> UC20–UC22
+  <b>UC Profesor:</b> UC30–UC32
+  <b>UC Bienestar:</b> UC40–UC43
+  <b>UC Asesoría:</b> UC50–UC53
+  <b>UC Reportes:</b> UC60–UC63
+  <b>UC Admin:</b> UC70–UC76
+endlegend
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #f2fbfc
+  BorderColor #132740
+  ArrowColor #007f94
+}
+
+actor Estudiante as EST
+actor Monitor as MON
+actor Profesor as PROF
+actor "Bienestar\nUniversitario" as BIE
+actor "Docente de\nAsesoría" as ASE
+actor Administrador as ADM
+
+rectangle "Sistema de Monitorías UCC" {
+
+  package "Sesión y base" {
+    usecase "UC01\nIniciar sesión\ncorreo + clave,\ntoken + menú por rol" as UC01
+    usecase "UC02\nCambiar contraseña\nreglas de fortaleza,\ncierra sesiones" as UC02
+    usecase "UC03\nVer panel de inicio\nmétricas del rol" as UC03
+    usecase "UC04\nCalendario y\nnotificaciones" as UC04
+  }
+
+  package "Estudiante" {
+    usecase "UC10\nSolicitar monitoría\nasignatura, tema,\nfecha y hora" as UC10
+    usecase "UC11\nConsultar mis\nmonitorías" as UC11
+    usecase "UC12\nPostularse como\nmonitor" as UC12
+  }
+
+  package "Monitor" {
+    usecase "UC20\nVer tutorías y\nasignados" as UC20
+    usecase "UC21\nProgramar tutoría\nvalida horario y\ntope semanal" as UC21
+    usecase "UC22\nRegistrar informe\nde horas" as UC22
+  }
+
+  package "Profesor" {
+    usecase "UC30\nReportar lista\nde riesgo" as UC30
+    usecase "UC31\nConsultar listas y\nasignaciones" as UC31
+    usecase "UC32\nValidar informe\naprueba/rechaza" as UC32
+  }
+
+  package "Bienestar Universitario" {
+    usecase "UC40\nValidar monitores" as UC40
+    usecase "UC41\nDecidir postulación\nverifica promedio\ne historial" as UC41
+    usecase "UC42\nAprobación final\nde horas" as UC42
+    usecase "UC43\nGestionar\nriesgo global" as UC43
+  }
+
+  package "Docente de Asesoría" {
+    usecase "UC50\nRevisar listas\nde riesgo" as UC50
+    usecase "UC51\nAsignar monitor\nal caso" as UC51
+    usecase "UC52\nResponder\nsolicitud" as UC52
+    usecase "UC53\nVer monitores\nhabilitados" as UC53
+  }
+
+  package "Reportes" {
+    usecase "UC60\nReporte de\nmonitorías" as UC60
+    usecase "UC61\nFiltrar y buscar\nen vivo" as UC61
+    usecase "UC62\nExportar CSV\ncompatible Excel" as UC62
+    usecase "UC63\nExportar PDF\nvía impresión" as UC63
+  }
+
+  package "Administración total" {
+    usecase "UC70\nCrear usuario\ncualquier rol +\nclave temporal" as UC70
+    usecase "UC71\nHabilitar monitor\nsobre estudiante" as UC71
+    usecase "UC72\nCrear materia y\nasignar profesor" as UC72
+    usecase "UC73\nActivar / desactivar\ncuenta" as UC73
+    usecase "UC74\nRestablecer\ncontraseña" as UC74
+    usecase "UC75\nAuditar\nactividad" as UC75
+    usecase "UC76\nSupervisar funciones\nopera como otro rol" as UC76
+  }
+}
+
+' ---- Relaciones actor → caso ----
+EST --> UC01
+EST --> UC02
+EST --> UC03
+EST --> UC04
+EST --> UC10
+EST --> UC11
+EST --> UC12
+
+MON --> UC01
+MON --> UC02
+MON --> UC03
+MON --> UC04
+MON --> UC20
+MON --> UC21
+MON --> UC22
+
+PROF --> UC01
+PROF --> UC02
+PROF --> UC03
+PROF --> UC04
+PROF --> UC30
+PROF --> UC31
+PROF --> UC32
+PROF --> UC60
+
+BIE --> UC01
+BIE --> UC02
+BIE --> UC03
+BIE --> UC04
+BIE --> UC40
+BIE --> UC41
+BIE --> UC42
+BIE --> UC43
+BIE --> UC60
+
+ASE --> UC01
+ASE --> UC02
+ASE --> UC03
+ASE --> UC04
+ASE --> UC50
+ASE --> UC51
+ASE --> UC52
+ASE --> UC53
+ASE --> UC60
+
+ADM --> UC01
+ADM --> UC03
+ADM --> UC60
+ADM --> UC70
+ADM --> UC71
+ADM --> UC72
+ADM --> UC73
+ADM --> UC74
+ADM --> UC75
+ADM --> UC76
+
+' ---- Relaciones caso → caso (flujos reales del sistema) ----
+UC10 ..> UC52 : <<notify>>\nasesoría responde
+UC12 ..> UC41 : <<notify>>\nbienestar decide
+UC41 ..> UC71 : aprobada <<include>>\nhabilita monitor
+UC30 ..> UC50 : <<notify>>\nasesoría recibe
+UC50 ..> UC51 : <<include>>\nrequiere lista
+UC51 ..> UC21 : asignado <<notify>>\nmonitor programa
+UC21 ..> UC22 : realizada <<include>>\nregistra informe
+UC22 ..> UC32 : <<notify>>\nprofesor valida
+UC32 ..> UC42 : aprobada <<notify>>\nbienestar cierra
+UC60 ..> UC61 : <<include>>
+UC60 ..> UC62 : <<extend>>
+UC60 ..> UC63 : <<extend>>
+UC70 ..> UC71 : rol=monitor <<include>>
+UC72 ..> UC30 : materia existe\n<<include>>
+UC76 ..> UC10 : actúa como\nestudiante
+UC76 ..> UC21 : actúa como\nmonitor
+UC76 ..> UC32 : actúa como\nprofesor
+UC76 ..> UC41 : actúa como\nbienestar
+UC76 ..> UC51 : actúa como\nasesoría
+
+note bottom of UC76
+  Toda acción de supervisión
+  queda registrada en auditoría
+  (actor real + objetivo).
+end note
+@enduml

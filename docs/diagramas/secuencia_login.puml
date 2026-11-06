@@ -1,0 +1,44 @@
+@startuml
+title Secuencia — Inicio de sesión y carga del panel
+header Flujo UC01 + UC03 + UC05
+autonumber
+
+actor "Usuario" as U
+boundary "SPA\naplicacion.js" as SPA
+control "POST /api\napi.py" as API
+control "sesion.py" as SES
+entity "MySQL\nusuarios/sesiones" as BD
+
+U -> SPA : correo + clave
+activate SPA
+SPA -> API : iniciar_sesion(correo, clave)
+activate API
+API -> SES : validar + crear_sesion()
+activate SES
+SES -> BD : SELECT usuario por correo
+activate BD
+BD --> SES : fila usuario
+deactivate BD
+alt credenciales válidas y cuenta activa
+  SES -> BD : INSERT sesión + tokens JWT
+  activate BD
+  BD --> SES : ok
+  deactivate BD
+  SES --> API : usuario + módulos + panel
+  API --> SPA : 200 {token, datos}
+  SPA -> SPA : construye menú por rol
+  SPA --> U : panel de inicio
+else credenciales inválidas
+  SES --> API : Error 401
+  API --> SPA : 401 {mensaje}
+  SPA --> U : alerta de error
+end
+deactivate SES
+deactivate API
+deactivate SPA
+
+note over API, SES
+  Token de acceso (20 min) + refresh
+  HttpOnly; auditoría de cada intento.
+end note
+@enduml

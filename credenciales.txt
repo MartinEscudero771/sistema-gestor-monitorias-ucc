@@ -1,0 +1,34 @@
+CREDENCIALES FIJAS DE DEMOSTRACIÓN
+Sistema de Gestor de Monitorías Académicas UCC
+
+Estas contraseñas están FIJAS: no cambian con --reset ni al re-sembrar
+la base. El archivo queda expuesto a propósito para uso académico.
+
+Las primeras 6 cuentas son LA de cada rol (las que se evalúan):
+  estudiante | monitor | profesor | bienestar | asesoria | admin
+
+Rol | Correo | Contraseña
+estudiante | camila.torres@ucc.edu.co | Estudiante#2026
+monitor | juan.perez@ucc.edu.co | Monitor#2026
+profesor | carlos.ramirez@ucc.edu.co | Profesor#2026
+bienestar | laura.gomez@ucc.edu.co | Bienestar#2026
+asesoria | andres.salazar@ucc.edu.co | Asesoria#2026
+admin | admin@ucc.edu.co | Admin#2026
+estudiante | sofia.rodriguez@ucc.edu.co | Est#2026SoR
+estudiante | mateo.gomez@ucc.edu.co | Est#2026MaG
+monitor | daniela.castro@ucc.edu.co | Mon#2026DaC
+profesor | marta.velez@ucc.edu.co | Prof#2026MaV
+profesor | hernan.ossa@ucc.edu.co | Prof#2026HeO
+bienestar | margarita.ruiz@ucc.edu.co | Bie#2026MaR
+monitor | lucia.herrera@ucc.edu.co | Mon#2026LuH
+estudiante | nicolas.mejia@ucc.edu.co | Est#2026NiM
+estudiante | valentina.diaz@ucc.edu.co | Est#2026VaD
+estudiante | santiago.rojas@ucc.edu.co | Est#2026SaR
+profesor | oscar.pena@ucc.edu.co | Prof#2026OsP
+estudiante | daniela.osorio@ucc.edu.co | Est#2026DaO
+monitor | yuliana.puerto@ucc.edu.co | Mon#2026YuP
+profesor | sara.contreras@ucc.edu.co | Prof#2026SaC
+estudiante | andres.villa@ucc.edu.co | Est#2026AnV
+asesoria | gloria.pedraza@ucc.edu.co | Ase#2026GlP
+estudiante | julian.alvarez@ucc.edu.co | Est#2026JuA
+estudiante | paola.cardenas@ucc.edu.co | Est#2026PaC

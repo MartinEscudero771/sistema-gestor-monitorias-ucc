@@ -1,0 +1,54 @@
+@startuml
+title Secuencia — Solicitud de monitoría (UC10 → UC52)
+header Estudiante solicita · Asesoría responde
+autonumber
+
+actor "Estudiante" as EST
+boundary "SPA\nestudiante.js" as SPA
+control "POST /api\napi.py" as API
+control "estudiante.py /\nasesoria.py" as MOD
+entity "MySQL" as BD
+actor "Asesoría" as ASE
+
+EST -> SPA : asignatura, tema, fecha, hora
+activate SPA
+SPA -> SPA : validación cliente\n(checkValidity)
+SPA -> API : estudiante_guardar_solicitud
+activate API
+API -> API : validar_token + rol=estudiante
+API -> MOD : guardar_solicitud_monitoria()
+activate MOD
+MOD -> BD : INSERT solicitud (pendiente)
+activate BD
+BD --> MOD : ok
+deactivate BD
+MOD -> BD : notificar rol asesoría
+activate BD
+BD --> MOD : ok
+deactivate BD
+MOD --> API : solicitud creada
+deactivate MOD
+API --> SPA : 200
+deactivate API
+SPA --> EST : toast de éxito
+deactivate SPA
+
+ASE -> SPA : abre Solicitudes
+activate SPA
+SPA -> API : asesoria_solicitudes
+activate API
+API --> SPA : lista de pendientes
+deactivate API
+ASE -> SPA : aceptar / rechazar + respuesta
+SPA -> API : asesoria_responder_solicitud
+activate API
+API -> MOD : responder + notifica estudiante
+activate MOD
+MOD -> BD : UPDATE estado + respuesta
+MOD --> API : ok
+deactivate MOD
+API --> SPA : 200
+deactivate API
+SPA --> ASE : toast de éxito
+deactivate SPA
+@enduml

@@ -1,0 +1,118 @@
+@startuml
+' ============================================================
+' MER — Entidades, llaves y cardinalidades (fuente: esquema.sql)
+' ============================================================
+title MER — Modelo Entidad-Relación · Monitorías UCC
+header 18 tablas · PK/FK · CHECK · UNIQUE · CASCADE
+footer Fuente de verdad: backend/app/esquema.sql
+
+skinparam class {
+  BackgroundColor #f2fbfc
+  BorderColor #132740
+  ArrowColor #007f94
+}
+
+class "usuarios" <<Entity>> {
+  {field} * id_usuario : VARCHAR <<PK>>
+  {field} * correo : VARCHAR <<UQ>>
+  {field} * rol : VARCHAR <<CHECK>>
+  {field} * id_perfil : VARCHAR
+  {field} activo : TINYINT
+}
+
+class "estudiantes" <<Entity>> {
+  {field} * id_estudiante : VARCHAR <<PK>>
+  {field} * promedio : DOUBLE <<0..5>>
+  {field} * programa : VARCHAR
+  {field} * semestre : INT
+}
+
+class "monitores" <<Entity>> {
+  {field} * id_monitor : VARCHAR <<PK>>
+  {field} * id_estudiante : VARCHAR <<FK,UQ>>
+  {field} * asignatura : VARCHAR
+  {field} estado : VARCHAR <<CHECK>>
+  {field} validado_por : VARCHAR <<FK>>
+}
+
+class "cursos" <<Entity>> {
+  {field} * id_curso : VARCHAR <<PK>>
+  {field} * codigo : VARCHAR <<UQ>>
+  {field} * id_profesor : VARCHAR <<FK>>
+  {field} * periodo : VARCHAR
+}
+
+class "solicitudes_monitoria" <<Entity>> {
+  {field} * id_solicitud : VARCHAR <<PK>>
+  {field} * id_estudiante : VARCHAR <<FK>>
+  {field} * estado : VARCHAR <<CHECK>>
+  {field} id_asesor : VARCHAR <<FK>>
+}
+
+class "postulaciones_monitor" <<Entity>> {
+  {field} * id_postulacion : VARCHAR <<PK>>
+  {field} * id_estudiante : VARCHAR <<FK>>
+  {field} estado : VARCHAR <<CHECK>>
+}
+
+class "listas_riesgo" <<Entity>> {
+  {field} * id_lista : VARCHAR <<PK>>
+  {field} * id_profesor : VARCHAR <<FK>>
+  {field} * id_curso : VARCHAR <<FK>>
+  {field} estado : VARCHAR <<CHECK>>
+}
+
+class "riesgo_estudiantes" <<Entity>> {
+  {field} * id_riesgo : VARCHAR <<PK>>
+  {field} * id_lista : VARCHAR <<FK,CASCADE>>
+  {field} * id_estudiante : VARCHAR <<FK>>
+  {field} estado : VARCHAR <<CHECK>>
+}
+
+class "asignaciones_riesgo" <<Entity>> {
+  {field} * id_asignacion : VARCHAR <<PK>>
+  {field} * id_riesgo : VARCHAR <<FK,UQ>>
+  {field} * id_monitor : VARCHAR <<FK>>
+  {field} * id_asesor : VARCHAR <<FK>>
+}
+
+class "monitorias" <<Entity>> {
+  {field} * id_monitoria : VARCHAR <<PK>>
+  {field} * id_monitor : VARCHAR <<FK>>
+  {field} * id_estudiante : VARCHAR <<FK>>
+  {field} * id_profesor : VARCHAR <<FK>>
+  {field} estado : VARCHAR <<CHECK>>
+}
+
+class "informes_horas" <<Entity>> {
+  {field} * id_informe : VARCHAR <<PK>>
+  {field} * id_monitoria : VARCHAR <<FK,UQ>>
+  {field} * id_monitor : VARCHAR <<FK>>
+  {field} estado : VARCHAR <<CHECK>>
+}
+
+class "notificaciones" <<Entity>> {
+  {field} * id_notificacion : VARCHAR <<PK>>
+  {field} * id_usuario : VARCHAR <<FK,CASCADE>>
+  {field} leida : TINYINT
+}
+
+"usuarios" ||--o{ "notificaciones" : tiene >
+"estudiantes" ||--|| "monitores" : "se habilita >"
+"estudiantes" ||--o{ "solicitudes_monitoria" : solicita >
+"estudiantes" ||--o{ "postulaciones_monitor" : postula >
+"estudiantes" ||--o{ "riesgo_estudiantes" : reportado_en >
+"cursos" ||--o{ "listas_riesgo" : origina >
+"listas_riesgo" ||--o{ "riesgo_estudiantes" : detalla >
+"riesgo_estudiantes" ||--o| "asignaciones_riesgo" : recibe >
+"monitores" ||--o{ "asignaciones_riesgo" : atiende >
+"monitores" ||--o{ "monitorias" : imparte >
+"monitorias" ||--o| "informes_horas" : genera >
+
+note bottom of "informes_horas"
+  Flujo FK completo:
+  monitoria → informe →
+  validación profesor →
+  aprobación bienestar.
+end note
+@enduml

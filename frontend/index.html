@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gestor de Monitorías Académicas de la Universidad Cooperativa de Colombia.">
+    <meta name="theme-color" content="#132740">
+    <title>Gestor de Monitorías Académicas UCC</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon_ucc.png">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css?v=4">
+</head>
+<body>
+    <a class="enlace_saltar" href="#contenido_principal">Saltar al contenido principal</a>
+
+    <div id="pantalla_carga" class="pantalla_carga" role="status" aria-live="polite">
+        <div class="pantalla_carga_contenido">
+            <img src="assets/img/logo_ucc.png" alt="Logo de la Universidad Cooperativa de Colombia" class="pantalla_carga_logo">
+            <div class="spinner-border text-light" aria-hidden="true"></div>
+            <p>Cargando el sistema...</p>
+        </div>
+    </div>
+
+    <main id="pantalla_login" class="pantalla_login d-none">
+        <section class="login_marca" aria-label="Presentación del sistema">
+            <div class="login_marca_contenido">
+                <div class="login_logo_caja">
+                    <img src="assets/img/logo_ucc.png" alt="Universidad Cooperativa de Colombia" class="login_logo">
+                </div>
+                <p class="login_etiqueta">Plataforma académica</p>
+                <h1>Gestor de<br>Monitorías Académicas</h1>
+                <p class="login_descripcion">
+                    Un espacio para coordinar el acompañamiento académico entre estudiantes,
+                    monitores, profesores, Bienestar Universitario y Asesoría.
+                </p>
+            </div>
+        </section>
+
+        <section class="login_formulario" aria-labelledby="titulo_login">
+            <div class="login_caja" id="caja_login">
+                <div class="login_caja_encabezado">
+                    <span class="etiqueta_superior">
+                        <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#lock-keyhole"></use></svg>
+                        Acceso institucional
+                    </span>
+                    <h2 id="titulo_login">Iniciar sesión</h2>
+                    <p>Ingrese con su correo UCC y su contraseña.</p>
+                </div>
+
+                <div id="alerta_login" class="alert alert-danger d-none" role="alert" aria-live="assertive"></div>
+
+                <form id="formulario_login" class="formulario_ucc" novalidate>
+                    <div class="mb-3">
+                        <label for="correo_login" class="form-label">Correo institucional</label>
+                        <div class="campo_con_icono">
+                            <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#mail"></use></svg>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="correo_login"
+                                name="correo"
+                                placeholder="nombre.apellido@ucc.edu.co"
+                                autocomplete="username"
+                                maxlength="120"
+                                required
+                            >
+                        </div>
+                        <div class="invalid-feedback">Escriba un correo electrónico válido.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contrasena_login" class="form-label">Contraseña</label>
+                        <div class="campo_con_icono campo_con_boton">
+                            <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#lock"></use></svg>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="contrasena_login"
+                                name="contrasena"
+                                placeholder="Ingrese su contraseña"
+                                autocomplete="current-password"
+                                maxlength="128"
+                                required
+                            >
+                            <button
+                                type="button"
+                                class="boton_ver_contrasena"
+                                id="boton_ver_contrasena"
+                                aria-label="Mostrar contraseña"
+                                title="Mostrar contraseña"
+                            >
+                                <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#eye"></use></svg>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">La contraseña es obligatoria.</div>
+                    </div>
+
+                    <button type="submit" class="btn boton_principal boton_ancho" id="boton_login">
+                        <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#log-in"></use></svg>
+                        Ingresar
+                    </button>
+
+                </form>
+
+                <div class="separador_registro" role="presentation"><span>o</span></div>
+
+                <button type="button" class="btn boton_secundario boton_ancho" id="boton_ir_registro">
+                    <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#user-plus"></use></svg>
+                    Crear cuenta de estudiante
+                </button>
+                <p class="login_pie">
+                    ¿Aún no tiene cuenta? Regístrese con sus datos académicos para
+                    postularse como monitor y solicitar asesorías.
+                </p>
+            </div>
+
+            <div class="login_caja d-none" id="caja_registro" aria-labelledby="titulo_registro">
+                <div class="login_caja_encabezado">
+                    <span class="etiqueta_superior">
+                        <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#user-plus"></use></svg>
+                        Registro de estudiante
+                    </span>
+                    <h2 id="titulo_registro">Crear cuenta</h2>
+                    <p>Con su cuenta podrá postularse como monitor y pedir asesorías a los monitores activos.</p>
+                </div>
+
+                <div id="alerta_registro" class="alert alert-danger d-none" role="alert" aria-live="assertive"></div>
+
+                <form id="formulario_registro" novalidate></form>
+
+                <button type="button" class="btn boton_secundario boton_ancho registro_volver" id="boton_cancelar_registro">
+                    <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#log-in"></use></svg>
+                    Volver al inicio de sesión
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div id="aplicacion" class="aplicacion d-none">
+        <aside
+            class="barra_lateral offcanvas-lg offcanvas-start"
+            tabindex="-1"
+            id="barra_lateral"
+            aria-labelledby="titulo_barra_lateral"
+        >
+            <div class="barra_marca">
+                <img src="assets/img/logo_ucc.png" alt="Universidad Cooperativa de Colombia">
+                <h2 id="titulo_barra_lateral" class="visualmente_oculto">Menú principal</h2>
+            </div>
+
+            <div class="perfil_lateral">
+                <div class="avatar_usuario" id="avatar_usuario" aria-hidden="true">U</div>
+                <div class="perfil_lateral_datos">
+                    <strong id="nombre_usuario">Usuario</strong>
+                    <span id="rol_usuario">Rol</span>
+                </div>
+                <button
+                    type="button"
+                    class="boton_cerrar_lateral d-lg-none"
+                    data-bs-dismiss="offcanvas"
+                    data-bs-target="#barra_lateral"
+                    aria-label="Cerrar menú"
+                >
+                    <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#x"></use></svg>
+                </button>
+            </div>
+
+            <nav id="navegacion_modulos" class="navegacion_modulos" aria-label="Módulos del sistema"></nav>
+
+            <div class="barra_lateral_acciones">
+                <button type="button" class="boton_lateral" id="boton_cambiar_contrasena">
+                    <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#key-round"></use></svg>
+                    Cambiar contraseña
+                </button>
+                <button type="button" class="boton_lateral boton_lateral_salir" id="boton_cerrar_sesion">
+                    <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#log-out"></use></svg>
+                    Cerrar sesión
+                </button>
+            </div>
+        </aside>
+
+        <div class="contenido_aplicacion">
+            <header class="cabecera_aplicacion">
+                <div class="cabecera_izquierda">
+                    <button
+                        type="button"
+                        class="boton_menu_movil d-lg-none"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#barra_lateral"
+                        aria-controls="barra_lateral"
+                        aria-label="Abrir menú"
+                    >
+                        <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#menu"></use></svg>
+                    </button>
+                    <div>
+                        <p class="cabecera_etiqueta" id="cabecera_rol">Panel académico</p>
+                        <h1 id="titulo_modulo">Inicio</h1>
+                    </div>
+                </div>
+                <div class="cabecera_derecha">
+                    <button
+                        type="button"
+                        class="boton_notificaciones"
+                        id="boton_notificaciones"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#panel_notificaciones"
+                        aria-controls="panel_notificaciones"
+                        aria-label="Abrir notificaciones"
+                    >
+                        <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#bell"></use></svg>
+                        <span id="contador_notificaciones" class="contador_notificaciones d-none">0</span>
+                    </button>
+                </div>
+            </header>
+
+            <main id="contenido_principal" class="contenido_principal" tabindex="-1">
+                <div id="zona_alertas" aria-live="polite"></div>
+                <section id="vista_modulo" aria-live="polite"></section>
+            </main>
+        </div>
+    </div>
+
+    <div
+        class="offcanvas offcanvas-end panel_notificaciones"
+        tabindex="-1"
+        id="panel_notificaciones"
+        aria-labelledby="titulo_notificaciones"
+    >
+        <div class="offcanvas-header">
+            <div>
+                <p class="etiqueta_superior">Centro de actividad</p>
+                <h2 class="offcanvas-title" id="titulo_notificaciones">Notificaciones</h2>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar notificaciones"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="barra_notificaciones">
+                <span id="resumen_notificaciones">Cargando...</span>
+                <button type="button" class="btn boton_secundario boton_pequeno" id="boton_marcar_todas">
+                    Marcar todas como leídas
+                </button>
+            </div>
+            <div id="lista_notificaciones" class="lista_notificaciones">
+                <div class="estado_vacio compacto">
+                    <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#bell"></use></svg>
+                    <p>Abra el panel para consultar sus notificaciones.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_cambiar_contrasena" tabindex="-1" aria-labelledby="titulo_modal_contrasena" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <p class="etiqueta_superior">Seguridad de la cuenta</p>
+                        <h2 class="modal-title" id="titulo_modal_contrasena">Cambiar contraseña</h2>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <form id="formulario_cambiar_contrasena" class="formulario_ucc" novalidate>
+                    <div class="modal-body">
+                        <div id="alerta_cambiar_contrasena" class="alert alert-danger d-none" role="alert"></div>
+                        <div class="mb-3">
+                            <label for="contrasena_actual" class="form-label">Contraseña actual</label>
+                            <input type="password" class="form-control" id="contrasena_actual" name="contrasena_actual" autocomplete="current-password" maxlength="128" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contrasena_nueva" class="form-label">Contraseña nueva</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="contrasena_nueva"
+                                name="contrasena_nueva"
+                                autocomplete="new-password"
+                                minlength="10"
+                                maxlength="128"
+                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{10,128}"
+                                title="Use al menos 10 caracteres, una mayúscula, una minúscula y un número."
+                                required
+                            >
+                            <div class="form-text">Mínimo 10 caracteres, una mayúscula, una minúscula y un número.</div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="confirmacion_contrasena" class="form-label">Confirmar contraseña nueva</label>
+                            <input type="password" class="form-control" id="confirmacion_contrasena" name="confirmacion_contrasena" autocomplete="new-password" minlength="10" maxlength="128" required>
+                        </div>
+                        <p class="form-text">
+                            <svg class="icono_ucc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="assets/iconos/lucide-sprite.svg#info"></use></svg>
+                            Al cambiarla se cerrarán todas sus sesiones activas.
+                        </p>
+                        <button type="submit" class="btn boton_principal boton_ancho" id="boton_guardar_contrasena">
+                            Actualizar contraseña
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="zona_toasts" class="zona_toasts" aria-live="polite" aria-atomic="true"></div>
+
+    <noscript>
+        <div class="alert alert-danger m-3">Para usar el sistema debe habilitar JavaScript en el navegador.</div>
+    </noscript>
+
+    <script defer src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script defer src="assets/vendor/fullcalendar/index.global.min.js"></script>
+    <script defer src="assets/vendor/fullcalendar/es.global.min.js"></script>
+    <script defer src="js/api.js?v=5"></script>
+    <script defer src="js/utilidades.js?v=5"></script>
+    <script defer src="js/modulos/notificaciones.js?v=5"></script>
+    <script defer src="js/modulos/inicio.js?v=5"></script>
+    <script defer src="js/modulos/calendario.js?v=5"></script>
+    <script defer src="js/modulos/revision_informes.js?v=5"></script>
+    <script defer src="js/modulos/estudiante.js?v=5"></script>
+    <script defer src="js/modulos/monitor.js?v=5"></script>
+    <script defer src="js/modulos/profesor.js?v=5"></script>
+    <script defer src="js/modulos/bienestar.js?v=5"></script>
+    <script defer src="js/modulos/asesoria.js?v=5"></script>
+    <script defer src="js/modulos/reportes.js?v=5"></script>
+    <script defer src="js/modulos/admin.js?v=5"></script>
+    <script defer src="js/modulos/configuracion.js?v=5"></script>
+    <script defer src="js/modulos/simulacion.js?v=5"></script>
+    <script defer src="js/modulos/registro.js?v=5"></script>
+    <script defer src="js/aplicacion.js?v=5"></script>
+</body>
+</html>

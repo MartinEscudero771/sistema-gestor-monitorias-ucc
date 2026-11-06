@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="Banner del Sistema de Gestor de Monitorías Académicas UCC">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#132740"/>
+      <stop offset="0.55" stop-color="#0e1e33"/>
+      <stop offset="1" stop-color="#0b1929"/>
+    </linearGradient>
+    <linearGradient id="acento" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00acc9"/>
+      <stop offset="0.5" stop-color="#0091b3"/>
+      <stop offset="1" stop-color="#007f94"/>
+    </linearGradient>
+    <linearGradient id="chips" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0b1929" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#132740" stop-opacity="0.85"/>
+    </linearGradient>
+    <pattern id="rejilla" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M 34 0 L 0 0 0 34" fill="none" stroke="#ffffff" stroke-opacity="0.028" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="halo" cx="0.82" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#00acc9" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#00acc9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- fondo -->
+  <rect x="0" y="0" width="1200" height="320" rx="18" fill="url(#fondo)"/>
+  <rect x="0" y="0" width="1200" height="320" rx="18" fill="url(#rejilla)"/>
+  <rect x="0" y="0" width="1200" height="320" rx="18" fill="url(#halo)"/>
+  <rect x="0" y="0" width="1200" height="320" rx="18" fill="none" stroke="#00acc9" stroke-opacity="0.35" stroke-width="2"/>
+
+  <!-- barra de acento -->
+  <rect x="0" y="0" width="1200" height="10" rx="5" fill="url(#acento)"/>
+  <rect x="0" y="0" width="220" height="10" rx="5" fill="#80ba27"/>
+  <rect x="220" y="0" width="90" height="10" rx="5" fill="#cad400"/>
+
+  <!-- monograma UCC -->
+  <g transform="translate(74, 92)">
+    <rect x="0" y="0" width="136" height="136" rx="16" fill="#00acc9" fill-opacity="0.12" stroke="#00acc9" stroke-opacity="0.6" stroke-width="1.6"/>
+    <text x="68" y="58" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="800" fill="#ffffff">UCC</text>
+    <text x="68" y="86" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" letter-spacing="2.6" fill="#7fd8e8">MONITORÍAS</text>
+    <path d="M 30 104 L 106 104" stroke="#80ba27" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 44 114 L 92 114" stroke="#cad400" stroke-opacity="0.55" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- título -->
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="258" y="128" font-size="44" font-weight="800" fill="#ffffff">Gestor de Monitorías Académicas</text>
+    <text x="260" y="166" font-size="21" font-weight="600" fill="#7fd8e8" letter-spacing="0.6">Servicio de acompañamiento académico · Universidad Cooperativa de Colombia</text>
+
+    <text x="260" y="204" font-size="15.5" fill="#c8d4dd">Solicitudes · postulaciones a monitor · listas de riesgo · informes de horas · calendario</text>
+    <text x="260" y="228" font-size="15.5" fill="#c8d4dd">notificaciones · reportes oficiales · auditoría · simulador de capacidad M/G/c</text>
+  </g>
+
+  <!-- franja diagonal decorativa -->
+  <g opacity="0.5">
+    <rect x="262" y="246" width="120" height="4" rx="2" fill="#00acc9"/>
+    <rect x="392" y="246" width="60" height="4" rx="2" fill="#80ba27"/>
+    <rect x="462" y="246" width="30" height="4" rx="2" fill="#cad400"/>
+  </g>
+
+  <!-- chips de tecnologías -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">
+    <g transform="translate(260, 268)">
+      <rect width="92" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
+      <circle cx="20" cy="17" r="5" fill="#80ba27"/>
+      <text x="34" y="22" fill="#eaf4f8">Python</text>
+      <rect width="92" height="34" rx="17" fill="none"/>
+    </g>
+    <g transform="translate(364, 268)">
+      <rect width="80" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
+      <circle cx="18" cy="17" r="5" fill="#00acc9"/>
+      <text x="30" y="22" fill="#eaf4f8">FastAPI</text>
+    </g>
+    <g transform="translate(456, 268)">
+      <rect width="96" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
+      <circle cx="18" cy="17" r="5" fill="#cad400"/>
+      <text x="31" y="22" fill="#eaf4f8">MySQL</text>
+    </g>
+    <g transform="translate(564, 268)">
+      <rect width="104" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
+      <circle cx="18" cy="17" r="5" fill="#ffca28"/>
+      <text x="31" y="22" fill="#eaf4f8">JavaScript</text>
+    </g>
+    <g transform="translate(680, 268)">
+      <rect width="98" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
+      <circle cx="18" cy="17" r="5" fill="#a78bfa"/>
+      <text x="31" y="22" fill="#eaf4f8">Bootstrap</text>
+    </g>
+    <g transform="translate(790, 268)">
+      <rect width="66" height="34" rx="17" fill="url(#chips)" stroke="#00acc9" stroke-opacity="0.55"/>
+      <circle cx="19" cy="17" r="5" fill="#f472b6"/>
+      <text x="30" y="22" fill="#eaf4f8">CSS</text>
+    </g>
+  </g>
+
+  <!-- sello a la derecha -->
+  <g transform="translate(1010, 96)" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <rect x="0" y="0" width="126" height="126" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#7fd8e8" stroke-opacity="0.4" stroke-width="1.4"/>
+    <path d="M63 22 L96 38 L63 54 L30 38 Z" fill="#80ba27"/>
+    <path d="M88 44 L88 66 C88 74 76 80 63 80 C50 80 38 74 38 66 L38 44 L52 51 L52 66 C52 71 57 74 63 74 C69 74 74 71 74 66 L74 51 Z" fill="#cad400"/>
+    <circle cx="63" cy="92" r="16" fill="none" stroke="#00acc9" stroke-width="2.4"/>
+    <path d="M55 92 L61 98 L72 86" stroke="#00acc9" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="63" y="118" font-size="12" letter-spacing="1.4" fill="#7fd8e8">NIVEL 5</text>
+  </g>
+</svg>

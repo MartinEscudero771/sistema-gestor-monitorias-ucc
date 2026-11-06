@@ -1,0 +1,58 @@
+@startuml
+' ============================================================
+' Componentes + Despliegue · Arquitectura Full Stack
+' ============================================================
+title Arquitectura — Componentes y despliegue · Monitorías UCC
+header FastAPI + MySQL + SPA · solo 127.0.0.1:8080
+
+package "Navegador (cliente)" {
+  [index.html\nHTML5 semántico] as HTML
+  [estilos.css\nCSS UCC + Bootstrap] as CSS
+  [api.js\nFetch POST /api] as APIJS
+  [aplicacion.js\nsesión + menú] as APP
+  [modulos/*.js\n10 vistas + reportes] as VISTAS
+  APP ..> APIJS : usa
+  VISTAS ..> APIJS : usa
+  HTML ..> APP : carga
+}
+
+package "Servidor FastAPI (backend/)" {
+  [principal.py\napp + errores] as PRIN
+  [api.py\nPOST /api] as APIPY
+  [rutas_extra.py\nREST + /health] as REST
+  [modulos/*.py\n12 controladores] as MODS
+  [validaciones.py] as VAL
+  [seguridad.py\nJWT + Argon2] as SEG
+  [base_datos.py\nPyMySQL] as BDPY
+  PRIN ..> APIPY : incluye
+  PRIN ..> REST : incluye
+  APIPY ..> MODS : despacha
+  REST ..> MODS : delega
+  MODS ..> VAL : valida
+  MODS ..> SEG : autentica
+  MODS ..> BDPY : consulta
+}
+
+database "MySQL/MariaDB\ngestor_monitorias\n18 tablas" as MySQL
+BDPY ..> MySQL : SQL parametrizado
+APIJS ..> APIPY : HTTP local JSON
+APIJS ..> REST : GET reportes
+
+node "Cliente\nWindows + navegador" {
+  [SPA] as SPA2
+}
+node "Servidor local\n127.0.0.1:8080\nPython 3 + Uvicorn" {
+  [FastAPI] as FAPI
+}
+node "Datos\nMariaDB/MySQL\npuerto 3306" {
+  [gestor_monitorias] as GDB
+}
+SPA2 ..> FAPI : HTTP JSON
+FAPI ..> GDB : PyMySQL 3306
+
+note bottom of MySQL
+  .env fuera del repo (.env.example
+  como guía). Sin Pillow en backend:
+  requirements mínimo y pineado.
+end note
+@enduml

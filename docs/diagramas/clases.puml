@@ -1,0 +1,194 @@
+@startuml
+' ============================================================
+' CL — Diagrama de clases COMPLETO (entidades + controladores)
+' Tipos según esquema.sql MySQL. Métodos según modulos/*.py
+' ============================================================
+title Diagrama de clases — Gestor de Monitorías Académicas UCC
+header UCC · Ingeniería de Sistemas
+footer PK = llave primaria · FK = llave foránea · * = UNIQUE
+legend right
+  <b>Reglas de integridad:</b>
+  CHECK rol, estado, promedios
+  UNIQUE correo, código, monitoria
+  CASCADE en riesgo y notificaciones
+endlegend
+
+skinparam class {
+  BackgroundColor #f2fbfc
+  BorderColor #132740
+  ArrowColor #007f94
+}
+
+package "Personas y acceso" {
+  class Usuario {
+    - id_usuario : String <<PK>>
+    - correo : String <<UQ>>
+    - nombre : String
+    - hash_contrasena : String
+    - rol : String <<CHECK>>
+    - id_perfil : String
+    - activo : bool
+    + describir() : dict
+  }
+
+  class Estudiante {
+    - id_estudiante : String <<PK>>
+    - promedio : float <<0..5>>
+    - materias_reprobadas : int
+    - programa : String
+    - semestre : int
+    + solicitar() : dict
+    + postularse() : dict
+  }
+
+  class Profesor {
+    - id_profesor : String <<PK>>
+    - departamento : String
+    + reportar_riesgo() : dict
+    + validar_informe() : dict
+  }
+
+  class Bienestar {
+    - id_bienestar : String <<PK>>
+    - cargo : String
+    + decidir_postulacion() : dict
+    + aprobar_horas() : dict
+  }
+
+  class Asesoria {
+    - id_asesor : String <<PK>>
+    - cargo : String
+    + asignar_monitor() : dict
+    + responder_solicitud() : dict
+  }
+
+  class Monitor {
+    - id_monitor : String <<PK>>
+    - asignatura : String
+    - max_horas_semanales : int
+    - estado : String <<CHECK>>
+    + programar() : dict
+    + informar() : dict
+  }
+
+  Usuario <|-- Estudiante : es un\nperfil de
+  Usuario <|-- Profesor : es un\nperfil de
+  Usuario <|-- Bienestar : es un\nperfil de
+  Usuario <|-- Asesoria : es un\nperfil de
+  Estudiante "1" -- "0..1" Monitor : se habilita >
+  Bienestar "1" -- "0..*" Monitor : valida >
+}
+
+package "Operación académica" {
+  class Solicitud {
+    - id_solicitud : String <<PK>>
+    - asignatura : String
+    - tema : String
+    - fecha_preferida : date
+    - estado : String <<CHECK>>
+    + responder() : dict
+  }
+
+  class Postulacion {
+    - id_postulacion : String <<PK>>
+    - asignatura : String
+    - estado : String <<CHECK>>
+    + decidir() : dict
+  }
+
+  class Curso {
+    - id_curso : String <<PK>>
+    - nombre : String
+    - codigo : String <<UQ>>
+    - periodo : String
+  }
+
+  class ListaRiesgo {
+    - id_lista : String <<PK>>
+    - asignatura : String
+    - estado : String <<CHECK>>
+    + asignar() : dict
+  }
+
+  class CasoRiesgo {
+    - id_riesgo : String <<PK>>
+    - motivo : String
+    - estado : String <<CHECK>>
+  }
+
+  class Asignacion {
+    - id_asignacion : String <<PK>>
+    - estado : String <<CHECK>>
+  }
+
+  class Monitoria {
+    - id_monitoria : String <<PK>>
+    - modalidad : String <<CHECK>>
+    - fecha : date
+    - hora_inicio : time
+    - hora_fin : time
+    - estado : String <<CHECK>>
+  }
+
+  class InformeHoras {
+    - id_informe : String <<PK>>
+    - fecha_sesion : date
+    - cantidad_horas : float
+    - actividades : String
+    - estado : String <<CHECK>>
+  }
+
+  Estudiante "1" -- "0..*" Solicitud : solicita >
+  Estudiante "1" -- "0..*" Postulacion : postula >
+  Profesor "1" -- "0..*" Curso : dicta >
+  Profesor "1" -- "0..*" ListaRiesgo : reporta >
+  Curso "1" -- "0..*" ListaRiesgo : origina >
+  ListaRiesgo "1" *-- "1..*" CasoRiesgo : detalla
+  CasoRiesgo "1" -- "0..1" Asignacion : recibe >
+  Monitor "1" -- "0..*" Asignacion : atiende >
+  Monitor "1" -- "0..*" Monitoria : imparte >
+  Monitoria "1" -- "0..1" InformeHoras : genera >
+  Profesor "1" -- "0..*" InformeHoras : valida >
+}
+
+package "Soporte" {
+  class Notificacion {
+    - id_notificacion : String <<PK>>
+    - titulo : String
+    - leida : bool
+  }
+
+  class Sesion {
+    - id_sesion : String <<PK>>
+    - fecha_expiracion : datetime
+    - revocada : bool
+  }
+
+  class Auditoria {
+    - id_auditoria : int <<PK>>
+    - accion : String
+    - resultado : String
+  }
+
+  class ReporteCtrl {
+    + horas_por_monitor() : dict
+    + por_asignatura() : dict
+    + por_estado() : dict
+  }
+
+  class AdminCtrl {
+    + crear_usuario() : dict
+    + crear_curso() : dict
+    + supervisar() : dict
+  }
+
+  Usuario "1" -- "0..*" Notificacion : recibe >
+  Usuario "1" -- "0..*" Sesion : mantiene >
+  Usuario "1" -- "0..*" Auditoria : genera >
+}
+
+note bottom of InformeHoras
+  UNIQUE(id_monitoria): una tutoría
+  genera máximo un informe.
+end note
+@enduml

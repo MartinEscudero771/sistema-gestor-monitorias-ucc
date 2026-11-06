@@ -1,0 +1,80 @@
+@startuml
+title Secuencia — Informe de horas y aprobación (UC22 → UC32 → UC42)
+header Monitor informa · Profesor valida · Bienestar cierra
+autonumber
+
+actor "Monitor" as MON
+boundary "SPA" as SPA
+control "POST /api" as API
+control "monitor.py /\nprofesor.py /\nbienestar.py" as MOD
+entity "MySQL" as BD
+actor "Profesor" as PROF
+actor "Bienestar" as BIE
+
+MON -> SPA : tutoría realizada + horas + actividades
+activate SPA
+SPA -> API : monitor_guardar_informe
+activate API
+API -> MOD : valida tope semanal y medias horas
+activate MOD
+MOD -> BD : INSERT informe (pendiente_profesor)\n+ UPDATE monitoría=realizada
+activate BD
+BD --> MOD : ok
+deactivate BD
+MOD -> BD : notifica al profesor
+MOD --> API : ok
+deactivate MOD
+API --> SPA : 200
+deactivate API
+SPA --> MON : registrado
+deactivate SPA
+
+PROF -> SPA : abre Validar horas
+activate SPA
+SPA -> API : profesor_informes
+activate API
+API --> SPA : pendientes
+deactivate API
+alt aprueba con firma
+  PROF -> SPA : aprobar + firma
+  SPA -> API : decidir_informe(aprobar)
+  activate API
+  API -> MOD : estado=pendiente_bienestar
+  activate MOD
+  MOD -> BD : UPDATE + notifica bienestar
+  MOD --> API : ok
+  deactivate MOD
+  API --> SPA : 200
+  deactivate API
+else rechaza
+  PROF -> SPA : rechazar + observación
+  SPA -> API : decidir_informe(rechazar)
+  activate API
+  API -> MOD : estado=rechazado
+  MOD --> API : ok
+  deactivate API
+end
+SPA --> PROF : toast
+deactivate SPA
+
+BIE -> SPA : abre Aprobar horas
+activate SPA
+SPA -> API : bienestar_informes
+activate API
+API --> SPA : pendientes
+deactivate API
+BIE -> SPA : aprobación final
+SPA -> API : decidir_informe_bienestar
+activate API
+API -> MOD : estado=aprobado
+MOD --> API : ok
+deactivate API
+SPA --> BIE : horas consolidadas
+deactivate SPA
+
+note over MOD, BD
+  UNIQUE(id_monitoria): una tutoría,
+  máximo un informe. SUM() se
+  normaliza a int/float para JSON.
+end note
+@enduml

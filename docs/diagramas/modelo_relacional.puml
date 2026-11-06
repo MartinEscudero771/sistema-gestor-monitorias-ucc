@@ -1,0 +1,108 @@
+@startuml
+' ============================================================
+' MR — Modelo relacional tabla por tabla (PK / FK / UNIQUE / CHECK)
+' ============================================================
+title MR — Modelo relacional · Monitorías UCC
+header MySQL/MariaDB utf8mb4 · consultas 100% parametrizadas
+footer backend/app/esquema.sql + base_datos.py
+
+skinparam packageStyle rectangle
+
+package "Acceso" {
+  class "usuarios" as T_us {
+    * id_usuario : VARCHAR(40) <<PK>>
+    * correo : VARCHAR(160) <<UQ>>
+    * rol : VARCHAR(20) <<CK>>
+    id_perfil / activo
+  }
+  class "sesiones" as T_ses {
+    * id_sesion : VARCHAR(40) <<PK>>
+    * hash_refresh : VARCHAR <<UQ>>
+    * id_usuario : VARCHAR <<FK>>
+  }
+  class "auditoria" as T_aud {
+    * id_auditoria : BIGINT <<PK>>
+    accion / resultado / fechas
+  }
+}
+
+package "Personas" {
+  class "estudiantes" as T_est {
+    * id_estudiante <<PK>>
+    promedio <<CK 0..5>>
+  }
+  class "profesores" as T_prof {
+    * id_profesor <<PK>>
+  }
+  class "bienestar" as T_bie {
+    * id_bienestar <<PK>>
+  }
+  class "docentes_asesoria" as T_ase {
+    * id_asesor <<PK>>
+  }
+  class "monitores" as T_mon {
+    * id_monitor <<PK>>
+    * id_estudiante <<FK,UQ>>
+    validado_por <<FK>>
+  }
+}
+
+package "Operación" {
+  class "cursos" as T_cur {
+    * id_curso <<PK>>
+    * codigo <<UQ>>
+    * id_profesor <<FK>>
+  }
+  class "solicitudes_monitoria" as T_sol {
+    * id_solicitud <<PK>>
+    * id_estudiante <<FK>>
+  }
+  class "postulaciones_monitor" as T_pos {
+    * id_postulacion <<PK>>
+    * id_estudiante <<FK>>
+  }
+  class "listas_riesgo" as T_lis {
+    * id_lista <<PK>>
+    * id_profesor <<FK>>
+    * id_curso <<FK>>
+  }
+  class "riesgo_estudiantes" as T_rie {
+    * id_riesgo <<PK>>
+    * id_lista <<FK,CASCADE>>
+    * id_estudiante <<FK>>
+  }
+  class "asignaciones_riesgo" as T_asg {
+    * id_asignacion <<PK>>
+    * id_riesgo <<FK,UQ>>
+    * id_monitor <<FK>>
+  }
+  class "monitorias" as T_mti {
+    * id_monitoria <<PK>>
+    * id_monitor <<FK>>
+    * id_estudiante <<FK>>
+    * id_profesor <<FK>>
+  }
+  class "informes_horas" as T_inf {
+    * id_informe <<PK>>
+    * id_monitoria <<FK,UQ>>
+    * cantidad_horas <<CK>>
+  }
+  class "notificaciones" as T_not {
+    * id_notificacion <<PK>>
+    * id_usuario <<FK,CASCADE>>
+  }
+}
+
+T_us --> T_ses : 1:N
+T_est --> T_mon : 1:1
+T_est --> T_sol : 1:N
+T_est --> T_pos : 1:N
+T_prof --> T_cur : 1:N
+T_cur --> T_lis : 1:N
+T_lis --> T_rie : 1:N CASCADE
+T_rie --> T_asg : 1:1
+T_mon --> T_asg : 1:N
+T_mon --> T_mti : 1:N
+T_mti --> T_inf : 1:1
+T_us --> T_not : 1:N CASCADE
+@enduml
