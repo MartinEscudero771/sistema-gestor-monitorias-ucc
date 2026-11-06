@@ -296,10 +296,10 @@ para que la suite no se rompa en máquinas de solo lectura.
 
 ## 🛣️ Hoja de ruta
 
-- [ ] Notifications por correo electrónico además del centro de mensajes
-- [ ] Inclusión en contenedores (Docker) para despliegue en servidores de la universidad
-- [ ] bitácora inmutable con firma y exportación para cumplimiento institucional
-- [ ] Accesibilidad: auditoría completa WCAG 2.2 AA con lectores de pantalla
+- [ ] Notificaciones por correo electrónico además del centro de mensajes
+- [ ] Empaquetado en contenedores (Docker) para despliegue en servidores de la universidad
+- [ ] Bitácora de auditoría con firma criptográfica y exportación para cumplimiento
+- [ ] Auditoría de accesibilidad WCAG 2.2 AA con lectores de pantalla
 - [ ] Tablero público de monitorías habilitadas por programa
 
 ## 📄 Licencia y créditos
