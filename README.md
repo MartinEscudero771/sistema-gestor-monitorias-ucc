@@ -58,7 +58,7 @@ backend/app/simulacion.py  motor determinista de escenario M/G/c
 backend/app/api.py  dispatcher POST /api
 backend/app/rutas_extra.py  GET /health + GET /api/reportes/*
 backend/app/esquema.sql  18 tablas PK/FK
-backend/tests/  suite pytest (70 pruebas: unitarias + extremo a extremo)
+backend/tests/  suite pytest (77 pruebas: unitarias + extremo a extremo)
 frontend/js/modulos/  vistas SPA (incl. configuracion.js, simulacion.js, registro.js)
 docs/  informe académico + diagramas PNG (ver Documentación)
 ```
@@ -95,7 +95,7 @@ Servidor solo `127.0.0.1:8080`. Credenciales **fijas** de demostración en `cred
 pushd backend
 ..\.venv\Scripts\python.exe -m pytest tests -q
 ```
-72 pruebas: jerarquía de errores, validaciones, simulador (determinismo, comparación de capacidad, histograma), repositorio (lista blanca) + extremo a extremo con TestClient sobre la BD real (registro público → login → perfil → foto guardar/borrar → simulación → 429). Si MariaDB no está disponible, las pruebas con BD se omiten. `iniciar.bat` corre la suite antes de abrir el servidor.
+77 pruebas: jerarquía de errores, validaciones, simulador (determinismo, comparación de capacidad, histograma), repositorio (lista blanca) + extremo a extremo con TestClient sobre la BD real (registro público → login → perfil → foto guardar/borrar → simulación → 429). Si MariaDB no está disponible, las pruebas con BD se omiten. `iniciar.bat` corre la suite antes de abrir el servidor.
 
 Casos de uso en [`docs/diagramas/casos_uso.md`](docs/diagramas/casos_uso.md) y diagramas en `docs/diagramas/` (casos de uso, historias HU01–HU14, clases, MER, modelo relacional, 5 secuencias, arquitectura, actividad). Análisis N5: [`docs/informe_n5.md`](docs/informe_n5.md).
 
